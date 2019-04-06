@@ -38,7 +38,9 @@ Demonstrate your understanding of this week's concepts by answering the followin
 
 1. What does bcrypt do to slow down attackers?
 
-1) What are the three parts of the JSON Web Token?
+   It can perform multiple hashing rounds on a password, adding an additional variable to the process that can make figuring out the actual password more difficult, or at least more resource intensive.
+
+1. What are the three parts of the JSON Web Token?
 
 ## Project Set Up
 
