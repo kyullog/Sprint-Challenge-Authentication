@@ -1,4 +1,5 @@
 const axios = require("axios");
+const bcrypt = require("bcryptjs");
 
 const { authenticate } = require("../auth/authenticate");
 const db = require("../database/dbHelpers.js");
@@ -15,6 +16,9 @@ async function register(req, res) {
   // implement user registration
   try {
     const user = req.body;
+    const hashword = bcrypt.hashSync(user.password, 9);
+    user.password = hashword;
+    console.log(user.password);
     const [newUserId] = await db.registerUser(user);
     if (newUserId) {
       res.status(201).json(newUserId);
