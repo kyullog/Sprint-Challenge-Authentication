@@ -21,16 +21,29 @@ async function register(req, res) {
     user.password = hashword;
     const [newUserId] = await db.registerUser(user);
     if (newUserId) {
-      const issueToken = createJWT(user);
-      res.status(201).json({ newUserId, issueToken });
+      const userInfo = db.getUser(user);
+      const token = createJWT(userInfo);
+      res.status(201).json({ newUserId, token });
     }
   } catch {
     res.status(500).json(genericError);
   }
 }
 
-function login(req, res) {
+async function login(req, res) {
   // implement user login
+  try {
+    const user = req.body;
+    const gotUser = await db.getUser(user);
+    if (gotUser && bcrypt.compareSync(user.password, gotUser.password)) {
+      const token = createJWT(gotUser);
+      res.status(200).json({ message: "Logged in!", token });
+    } else {
+      res.status(404).json({ error: "Please provide proper credentials" });
+    }
+  } catch {
+    res.status(500).json(genericError);
+  }
 }
 
 function getJokes(req, res) {

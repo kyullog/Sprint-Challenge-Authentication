@@ -11,7 +11,6 @@ function makeToken(user) {
   const options = {
     expiresIn: "6h"
   };
-
   return jswToken.sign(payload, jswTokenKey, options);
 }
 
