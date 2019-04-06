@@ -1,6 +1,7 @@
 const axios = require("axios");
 const bcrypt = require("bcryptjs");
 
+const createJWT = require("../auth/tokenMaker.js");
 const { authenticate } = require("../auth/authenticate");
 const db = require("../database/dbHelpers.js");
 
@@ -18,10 +19,10 @@ async function register(req, res) {
     const user = req.body;
     const hashword = bcrypt.hashSync(user.password, 9);
     user.password = hashword;
-    console.log(user.password);
     const [newUserId] = await db.registerUser(user);
     if (newUserId) {
-      res.status(201).json(newUserId);
+      const issueToken = createJWT(user);
+      res.status(201).json({ newUserId, issueToken });
     }
   } catch {
     res.status(500).json(genericError);
