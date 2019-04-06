@@ -42,11 +42,11 @@ Demonstrate your understanding of this week's concepts by answering the followin
 
 1. What are the three parts of the JSON Web Token?
 
-A JSON Web Token consists of:
+   A JSON Web Token consists of:
 
-- header: contains the encryption algorithm and the token type
-- payload: contains the data that is being transmitted
-- signature: a base64 encoded string created from the header and payload, signed with a secret.
+   - header: contains the encryption algorithm and the token type
+   - payload: contains the data that is being transmitted
+   - signature: a base64 encoded string created from the header and payload, signed with a secret.
 
 ## Project Set Up
 
