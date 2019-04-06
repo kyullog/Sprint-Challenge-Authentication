@@ -21,7 +21,7 @@ async function register(req, res) {
     user.password = hashword;
     const [newUserId] = await db.registerUser(user);
     if (newUserId) {
-      const userInfo = db.getUser(user);
+      const userInfo = await db.getUser(user);
       const token = createJWT(userInfo);
       res.status(201).json({ newUserId, token });
     }
