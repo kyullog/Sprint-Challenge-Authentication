@@ -1,7 +1,9 @@
 const baseUrl = "http://localhost:3300";
 
-export default (endpoints = {
+const endpoints = {
   register: `${baseUrl}/api/register`,
   login: `${baseUrl}/api/login`,
-  jokes: `${baseurl}/api/jokes`
-});
+  jokes: `${baseUrl}/api/jokes`
+};
+
+export default endpoints;
